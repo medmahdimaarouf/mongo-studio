@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/add_db.ico</file>
+        <file>icons/current_db.ico</file>
+        <file>icons/delete_db.ico</file>
+        <file>icons/export_db.ico</file>
+        <file>icons/import_db.ico</file>
+        <file>icons/add_doc.ico</file>
+        <file>icons/delete_doc.ico</file>
+        <file>icons/edit_doc.ico</file>
+        <file>icons/connection.ico</file>
+        <file>icons/data.ico</file>
+        <file>icons/function.ico</file>
+        <file>icons/index.ico</file>
+        <file>icons/info_15181.ico</file>
+        <file>icons/mongo.ico</file>
+        <file>icons/refresh.ico</file>
+        <file>icons/do_connect.ico</file>
+        <file>icons/do_disconnect.ico</file>
+        <file>icons/migrate.ico</file>
+        <file>icons/exit.ico</file>
+        <file>icons/document.ico</file>
+    </qresource>
+</RCC>

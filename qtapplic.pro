@@ -9,16 +9,30 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    collectionitem.cpp \
+    connectionitem.cpp \
+    databaseitem.cpp \
+    dialogconnect.cpp \
+    documentitem.cpp \
+    documentview.cpp \
     main.cpp \
     mainwindow.cpp \
     mongodriver.cpp
 
 HEADERS += \
+    collectionitem.h \
+    connectionitem.h \
+    databaseitem.h \
+    dialogconnect.h \
+    documentitem.h \
+    documentview.h \
     mainwindow.h \
     mongodriver.h \
     mongodriverutils.h
 
 FORMS += \
+    dialogconnect.ui \
+    documentview.ui \
     mainwindow.ui
 
 # Default rules for deployment.
@@ -55,3 +69,6 @@ win32: LIBS += -LC:/boost/lib/ -lboost_context-mgw8-mt-x64-1_75
 
 INCLUDEPATH += C:/boost/include/boost-1_75
 DEPENDPATH += C:/boost/include/boost-1_75
+
+RESOURCES += \
+    resource.qrc

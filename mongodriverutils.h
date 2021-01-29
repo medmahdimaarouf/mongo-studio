@@ -2,6 +2,39 @@
 #define MONGODRIVERUTILS_H
 #include<QString>
 #include<QtDebug>
+
+class CollectionDocument{
+public:
+    CollectionDocument(){}
+    CollectionDocument(QString id){this->id = id;}
+    QString getId(){return this->id;}
+    void addValue(QString key,QVariant value){this->data.insert(key,value);}
+    void setJsonFormat(QString json){this->jsonFormat = json;}
+    QString getJsonFormat(){return jsonFormat;}
+private:
+    QString id;
+    QMap<QString,QVariant> data;
+    QString jsonFormat ;
+};
+
+
+class DataBaseCollection{
+public:
+    void setName(QString name){this->name = name;}
+    QString getName() {return this->name;}
+    void setType(QString type){this->type = type;}
+    QString getType(){return this->type;}
+    void setJsonFormat(QString json){this->jsonFormat = json;}
+    QString getJsonFormat(){return this->jsonFormat;}
+    void addDocument(CollectionDocument document){this->documents.insert(document.getId(),document);}
+    QList<CollectionDocument> getDocuments(){return this->documents.values();}
+private:
+    QString name;
+    QString type;
+    QString jsonFormat;
+    QMap<QString,CollectionDocument> documents;
+};
+
 class DataBase{
     public:
     void setName(QString name){this->name = name;}
@@ -12,11 +45,27 @@ class DataBase{
     bool isEmpty(){return this->_isEmpty;}
     double getSizeOnDisk(){return this->sizeOnDisk;}
     QString toJson(){return this->jsonData;}
+    void addCollection(DataBaseCollection collection){this->collections.insert(collection.getName(),collection);}
+    DataBaseCollection getCollection(QString collectionName){return this->collections.value(collectionName);}
+    QList<QString> getCollectionsNames(){return this->collections.keys();}
+    QList<DataBaseCollection> getCollections (){return this->collections.values();}
+
+    QString toString(){
+        QString string_collections = "";
+        for(DataBaseCollection c : getCollections()){
+            string_collections += c.getJsonFormat() + ",";
+        }
+        string_collections.remove(string_collections.length() - 1,1);
+
+        return  "{\"databaseinfo\":" + jsonData + ",\"collections\":[" + string_collections + "]},";
+    }
+
 private:
     QString name;
     bool _isEmpty;
     double sizeOnDisk;
     QString jsonData;
+    QMap<QString,DataBaseCollection> collections;
 };
 
 class ConnectionUri{

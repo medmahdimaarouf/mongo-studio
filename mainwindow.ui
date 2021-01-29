@@ -6,40 +6,496 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>908</width>
+    <height>454</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Mongo Studio 1.0</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/icons/icons/mongo.ico</normaloff>:/icons/icons/mongo.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>204</x>
-      <y>52</y>
-      <width>191</width>
-      <height>131</height>
-     </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
     </property>
-    <property name="text">
-     <string>PushButton</string>
+    <property name="topMargin">
+     <number>0</number>
     </property>
-   </widget>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="horizontalSpacing">
+     <number>6</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QTabWidget" name="documentTabView">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="tabShape">
+          <enum>QTabWidget::Rounded</enum>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+         <property name="tabsClosable">
+          <bool>true</bool>
+         </property>
+         <property name="movable">
+          <bool>true</bool>
+         </property>
+         <property name="tabBarAutoHide">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>908</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuData_Bases">
+    <property name="title">
+     <string>Data Bases</string>
+    </property>
+    <widget class="QMenu" name="menuConnections">
+     <property name="title">
+      <string>Connections</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resource.qrc">
+       <normaloff>:/icons/icons/connection.ico</normaloff>:/icons/icons/connection.ico</iconset>
+     </property>
+     <addaction name="actionConnect"/>
+     <addaction name="actionDisconnect"/>
+    </widget>
+    <widget class="QMenu" name="menuMigrate">
+     <property name="title">
+      <string>Migrate</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resource.qrc">
+       <normaloff>:/icons/icons/migrate.ico</normaloff>:/icons/icons/migrate.ico</iconset>
+     </property>
+     <addaction name="actionMigrate_Shema"/>
+     <addaction name="actionMigrate_Data"/>
+    </widget>
+    <addaction name="menuConnections"/>
+    <addaction name="separator"/>
+    <addaction name="actionAdd_data_base"/>
+    <addaction name="actiondelete_data_base"/>
+    <addaction name="actionUpdate_data_base"/>
+    <addaction name="separator"/>
+    <addaction name="menuMigrate"/>
+    <addaction name="actionExport_data_base"/>
+    <addaction name="actionImport_data_base"/>
+    <addaction name="separator"/>
+    <addaction name="actionRefresh"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuMongo">
+    <property name="title">
+     <string>Docs</string>
+    </property>
+    <addaction name="actionCreate_document"/>
+    <addaction name="actionEdit_document"/>
+    <addaction name="actionDelete_document"/>
+    <addaction name="separator"/>
+    <addaction name="actionCreate_index"/>
+    <addaction name="actionDelete_index"/>
+    <addaction name="actionUpdate_index"/>
+    <addaction name="separator"/>
+    <addaction name="actionAdd_plugin"/>
+    <addaction name="actionDelete_plugin"/>
+    <addaction name="actionUpdate_plugin"/>
+    <addaction name="separator"/>
+    <addaction name="actionCreate_function"/>
+   </widget>
+   <widget class="QMenu" name="menuVue">
+    <property name="title">
+     <string>Vue</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionhelp"/>
+    <addaction name="actionabout"/>
+   </widget>
+   <addaction name="menuData_Bases"/>
+   <addaction name="menuMongo"/>
+   <addaction name="menuVue"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionConnect"/>
+   <addaction name="separator"/>
+   <addaction name="actionDisconnect"/>
+  </widget>
+  <widget class="QDockWidget" name="DatabasesDock">
+   <property name="windowIcon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/connection.ico</normaloff>:/icons/icons/connection.ico</iconset>
+   </property>
+   <property name="windowTitle">
+    <string>Data bases</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_2">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing">
+      <number>1</number>
+     </property>
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>2</number>
+     </property>
+     <item>
+      <widget class="QLineEdit" name="search"/>
+     </item>
+     <item>
+      <widget class="QTreeView" name="connectionsTree">
+       <property name="headerHidden">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockWidget_3">
+   <property name="windowTitle">
+    <string>Consol</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_3">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QTextEdit" name="textEdit"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QToolBar" name="toolBar_2">
+   <property name="windowTitle">
+    <string>toolBar_2</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionAdd_data_base"/>
+   <addaction name="actiondelete_data_base"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar_3">
+   <property name="windowTitle">
+    <string>toolBar_3</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionCreate_document"/>
+   <addaction name="actionCreate_index"/>
+   <addaction name="actionCreate_function"/>
+   <addaction name="separator"/>
+   <addaction name="actionhelp"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar_4">
+   <property name="windowTitle">
+    <string>toolBar_4</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionImport_data_base"/>
+   <addaction name="separator"/>
+   <addaction name="actionExport_data_base"/>
+  </widget>
+  <action name="actionConnect">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/do_connect.ico</normaloff>:/icons/icons/do_connect.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </action>
+  <action name="actionDisconnect">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/do_disconnect.ico</normaloff>:/icons/icons/do_disconnect.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Disconnect</string>
+   </property>
+   <property name="toolTip">
+    <string>Disconnect</string>
+   </property>
+  </action>
+  <action name="actionCreate_document">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/add_doc.ico</normaloff>:/icons/icons/add_doc.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Create document</string>
+   </property>
+  </action>
+  <action name="actionEdit_document">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/edit_doc.ico</normaloff>:/icons/icons/edit_doc.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Edit document</string>
+   </property>
+  </action>
+  <action name="actionDelete_document">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/delete_doc.ico</normaloff>:/icons/icons/delete_doc.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Delete document</string>
+   </property>
+  </action>
+  <action name="actionAdd_data_base">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/add_db.ico</normaloff>:/icons/icons/add_db.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Add data base</string>
+   </property>
+  </action>
+  <action name="actiondelete_data_base">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/delete_db.ico</normaloff>:/icons/icons/delete_db.ico</iconset>
+   </property>
+   <property name="text">
+    <string>delete data base</string>
+   </property>
+  </action>
+  <action name="actionUpdate_data_base">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/current_db.ico</normaloff>:/icons/icons/current_db.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Update data base</string>
+   </property>
+  </action>
+  <action name="actionExport_data_base">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/export_db.ico</normaloff>:/icons/icons/export_db.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Export data base</string>
+   </property>
+  </action>
+  <action name="actionConnect_2">
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </action>
+  <action name="actionDelete_Connection">
+   <property name="text">
+    <string>Disconnect</string>
+   </property>
+  </action>
+  <action name="actionUpdate_Connection">
+   <property name="text">
+    <string>Update Connection</string>
+   </property>
+  </action>
+  <action name="actionImport_data_base">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/export_db.ico</normaloff>:/icons/icons/export_db.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Import data base</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/refresh.ico</normaloff>:/icons/icons/refresh.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/exit.ico</normaloff>:/icons/icons/exit.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionCreate_index">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/index.ico</normaloff>:/icons/icons/index.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Create index</string>
+   </property>
+  </action>
+  <action name="actionDelete_index">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/index.ico</normaloff>:/icons/icons/index.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Delete index</string>
+   </property>
+  </action>
+  <action name="actionUpdate_index">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/index.ico</normaloff>:/icons/icons/index.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Update index</string>
+   </property>
+  </action>
+  <action name="actionCreate_function">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/function.ico</normaloff>:/icons/icons/function.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Create function</string>
+   </property>
+  </action>
+  <action name="actionAdd_plugin">
+   <property name="text">
+    <string>Add plugin</string>
+   </property>
+  </action>
+  <action name="actionDelete_plugin">
+   <property name="text">
+    <string>Delete plugin</string>
+   </property>
+  </action>
+  <action name="actionUpdate_plugin">
+   <property name="text">
+    <string>Update plugin</string>
+   </property>
+  </action>
+  <action name="actionMigrate_Shema">
+   <property name="text">
+    <string>Migrate Shema</string>
+   </property>
+  </action>
+  <action name="actionMigrate_Data">
+   <property name="text">
+    <string>Migrate Data</string>
+   </property>
+  </action>
+  <action name="actionhelp">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icons/icons/info_15181.ico</normaloff>:/icons/icons/info_15181.ico</iconset>
+   </property>
+   <property name="text">
+    <string>help</string>
+   </property>
+  </action>
+  <action name="actionabout">
+   <property name="text">
+    <string>about</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

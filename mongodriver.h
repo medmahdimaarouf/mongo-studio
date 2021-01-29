@@ -24,18 +24,35 @@ using bsoncxx::stdx::string_view;
 using mongocxx::collection;
 using mongocxx::validation_criteria;
 
-class MongoDriver
+class MongoConnection
 {
-public:
-    static MongoDriver *driverInstence();
-    static MongoDriver *driverInstence(ConnectionUri uri);
 
+public:
+    MongoConnection(ConnectionUri uri);
     QMap<QString,DataBase> getDataBases();
-    void getDataBaseCollections(DataBase database);
+    QString getJson(){
+        QMap<QString,DataBase> databses =  this->getDataBases();
+        QString sdebug = "";
+
+        if(!databses.isEmpty()){
+           for(DataBase db :this->getDataBases()){
+               sdebug += db.toString();
+           }
+           sdebug = "[" + sdebug.remove(sdebug.length() -1,1) + "]";
+        }
+        return sdebug;
+    }
+
+    ConnectionUri getUri()const{return uri;}
+
+    DataBase fetchDataBase(const bsoncxx::document::view *view);
+    DataBaseCollection fetchCollection(mongocxx::database database,const bsoncxx::document::view *view);
+    CollectionDocument fetchDocument(mongocxx::collection collection, const bsoncxx::document::view *view);
+    QVariant fetchElement(const bsoncxx::document::element element);
 private:
-    MongoDriver(ConnectionUri uri);
-    static MongoDriver *instance ;
     mongocxx::client client;
+    ConnectionUri uri;
+//slots:
 };
 
 #endif // MONGODRIVER_H
